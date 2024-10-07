@@ -1,7 +1,8 @@
-<H3>NAME: HARSHAVARDHAN</H3>
-<H3>REGISTER NO: 212222240114</H3>
-<H3>EX. NO.4</H3>
-<H3>DATE:</H3>
+<H5> Name : HARSHAVARDHAN </H5>
+<H5>Register No.: 212222240114 </H5>
+<H5> Experiment: 4 </H5>
+<H5> DATE: 8</H5>
+
 <H1 ALIGN =CENTER> Implementation of Hidden Markov Model</H1>
 
 ## Aim: 
@@ -21,67 +22,45 @@ Step 8:Calculate the probability of the observed sequence by summing the last ro
 Step 9:Find the most likely sequence of hidden states by selecting the hidden state with the highest probability at each time step based on the alpha matrix.<br>
 
 ## Program:
-### Import the necessary packages
-```
+```python
 import numpy as np
-```
-### Define the transition matrix,emission matrix,initial probabilitiesand observed sequence.
-```
-transition_matrix=np.array([[0.7,0.3],[0.4,0.6]])
-initial_probabilities=np.array([0.5,0.5])
-observed_sequence=np.array([1,1,1,0,0,1])
-emisson_matrix=np.array([[0.1,0.9],[0.8,0.2]])
+#Define the transition matrix
+transition_matrix =np.array([[0.7,0.3],[0.4,0.6]])
+#Define the emission matrix
+emission_matrix =np.array ([[0.1,0.9],[0.8,0.2]])
+#Define the initial probabilities
+initial_probabilities = np.array([0.5,0.5])
+#Define the observed sequence
+observed_sequence = np.array([1,1,1,0,0,1])
+# Initialize the alpha matrix
+alpha = np. zeros ((len(observed_sequence) ,len (initial_probabilities) ) )
+# Calculate the first row of the alpha matrix
+alpha [0,:] = initial_probabilities *emission_matrix[:, observed_sequence [0]]
+# Loop through the rest of the observed sequence and calculate the rest of the alpha matrix
+for t in range (1, len (observed_sequence) ) :
+  for j in range (len (initial_probabilities) ) :
+    alpha[t,j]= emission_matrix [j,observed_sequence[t]] *np.sum(alpha[t-1:]*transition_matrix[:, j])
 
-```
-### Initialize the alpha matrix
-```
-alpha=np.zeros((len(observed_sequence),len(initial_probabilities)))
-
-```
-### Calculate the first row of the alpha matrix
-```
-alpha[0,:]=initial_probabilities*emisson_matrix[:,observed_sequence[0]]
-```
-### Loop through the rest of the observed sequence and calculate the rest of the alpha matrix
-```
-for t in range(1,len(observed_sequence)):
-  for j in range(len(initial_probabilities)):
-    alpha[t,j]=emisson_matrix[j,observed_sequence[t]]*np.sum(alpha[t-1,:]*transition_matrix[:,j])
-
-```
-### Calculate the probability of the observed sequence
-```
-probability=np.sum(alpha[-1,:])
-
-```
-### Print the probability of the observed sequence
-```
-print("The probability of the observed sequence is:",probability)
-```
-
-### Find the most likely sequence of weather states given the observed sequence
-```
+# Calculate the probability of the observed sequence
+probability = np.sum(alpha[-1,:])
+# Print the probability of the observed sequence
+print ("The probability of the observed sequence is: " ,probability)
+# Find the most likely sequence of weather states given the observed sequence
 most_likely_sequence=[]
-for t in range(len(observed_sequence)):
-  if(alpha[t,0] > alpha[t,1]):
-    most_likely_sequence.append("sunny")
+for t in range (len (observed_sequence)):
+  if alpha [t, 0] > alpha [t,1]:
+    most_likely_sequence.append ("sunny")
   else:
-    most_likely_sequence.append('rainy')
-
+    most_likely_sequence.append ("rainy")
+print("The most likely sequence of Weather States is",most_likely_sequence)
 ```
-### Print the most likely sequence of weather states
-```
-print("The most likely sequence of weather states is:",most_likely_sequence)
-```
-
 
 ## Output:
-## probability of the observed sequence
-![Screenshot 2024-09-12 132609](https://github.com/user-attachments/assets/9a757e9e-035f-4112-8670-5bd9c6088034)
-## Print the most likely sequence of weather states
-![Screenshot 2024-09-12 132615](https://github.com/user-attachments/assets/c5282c32-d1c0-40a4-9002-7f61b7d25932)
 
+![366778109-dfcabb42-1c04-48c7-8824-6d7a00e091e8](https://github.com/user-attachments/assets/d671e78c-96c5-4a67-b2b9-cea9d89b3e7a)
 
 ## Result:
 Thus Hidden Markov Model is implemented using python.
+
+
 
