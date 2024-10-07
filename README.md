@@ -1,7 +1,7 @@
 <H3> Name : HARSHAVARDHAN </H3>
 <H3>Register No.: 212222240114 </H3>
 <H3> Experiment: 4 </H3>
-<H3> DATE: 8/H3>
+<H3> DATE: </H3>
 
 <H1 ALIGN =CENTER> Implementation of Hidden Markov Model</H1>
 
